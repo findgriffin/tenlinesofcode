@@ -11,7 +11,7 @@ types:
 	mypy .
 
 test:
-	coverage run --source stub -m unittest discover
+	coverage run --source tenloc -m unittest discover
 	coverage html
 	coverage report --fail-under=90
 
