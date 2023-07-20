@@ -14,13 +14,13 @@ def setup(argv) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def run(args: argparse.Namespace) -> str:
+def run(args: argparse.Namespace, testing: bool = False) -> None:
     if args.all:
         say_my_name()
     elif args.examples:
         if 'say_my_name' in args.examples:
             say_my_name()
         if 'metronome' in args.examples:
-            metronome()
+            metronome(2, testing)
     else:
         print('Please specify an example, or --all')

@@ -1,4 +1,6 @@
 import unittest
+from unittest.mock import patch
+
 from tenloc import tenloc
 
 
@@ -6,25 +8,28 @@ class TestStub(unittest.TestCase):
 
     def test_parser(self):
         # Given
-        input = ["--name", "Davo"]
+        input = ["--all"]
 
         # When
         result = tenloc.setup(input)
 
         # Then
         self.assertFalse(result.verbose)
-        self.assertEqual(result.name, input[1])
+        self.assertTrue(result.all)
 
     def test_no_name(self):
         # When
-        result = tenloc.run()
+        result = tenloc.run(tenloc.setup([]))
 
         # Then
-        self.assertEqual(result, "Hello, world!")
+        self.assertIsNone(result)
 
-    def test_name(self):
+    def test_say_my_name(self):
         # When
-        result = tenloc.run("Davo")
+        with patch('builtins.input', return_value='Davo'):
+            result = tenloc.run(tenloc.setup(['say_my_name']))
+            # Then
+            self.assertIsNone(result)
 
-        # Then
-        self.assertEqual(result, "Hello, Davo!")
+    def test_metronome(self):
+        tenloc.run(tenloc.setup(['metronome']), testing=True)

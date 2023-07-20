@@ -5,10 +5,10 @@ install:
 	pip3 install -r requirements.txt
 
 style:
-	flake8
+	flake8 tenloc
 
 types:
-	mypy .
+	mypy tenloc tests
 
 test:
 	coverage run --source tenloc -m unittest discover
