@@ -1,5 +1,7 @@
 import argparse
 from tenloc.say_my_name import say_my_name
+from tenloc.metronome import metronome
+
 
 def setup(argv) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -18,5 +20,7 @@ def run(args: argparse.Namespace) -> str:
     elif args.examples:
         if 'say_my_name' in args.examples:
             say_my_name()
+        if 'metronome' in args.examples:
+            metronome()
     else:
         print('Please specify an example, or --all')
