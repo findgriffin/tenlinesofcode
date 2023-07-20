@@ -1,22 +1,22 @@
-import logging
-from typing import Optional
 import argparse
-
+from tenloc.say_my_name import say_my_name
 
 def setup(argv) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="This is a Python 3 project.")
-    parser.add_argument("--name", type=str, required=False,
-                        help="Your name, for example 'Margaret'.")
+    parser.add_argument("--all", action='store_true',
+                        help="Run all 'ten lines of code' examples.")
     parser.add_argument("-v", "--verbose",  action="store_true",
                         help="Enable verbose logging.")
+    parser.add_argument('examples', type=str, nargs='*')
     return parser.parse_args(argv)
 
 
-def run(name: Optional[str] = None) -> str:
-    if name:
-        logging.debug("Name given.")
-        return f"Hello, {name}!"
+def run(args: argparse.Namespace) -> str:
+    if args.all:
+        say_my_name()
+    elif args.examples:
+        if 'say_my_name' in args.examples:
+            say_my_name()
     else:
-        logging.debug("No name given.")
-        return "Hello, world!"
+        print('Please specify an example, or --all')
