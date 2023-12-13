@@ -4,6 +4,7 @@ import sys
 from typing import Iterable
 from json.decoder import JSONDecodeError
 
+
 def pretty_json(input_filename):
     out_filename = '.'.join(input_filename.split('.')[:-1]) + '-pretty.json'
     with open(input_filename, 'r') as in_json:
