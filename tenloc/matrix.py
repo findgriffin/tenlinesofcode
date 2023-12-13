@@ -18,4 +18,3 @@ def matrix_frames(word_length: int, chars: str, n: int = 4,
 
 if __name__ == "__main__":
     matrix_frames(int(argv[1]) if len(argv) > 1 else 10, string.hexdigits)
-
