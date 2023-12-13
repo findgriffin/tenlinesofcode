@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 import json
 import sys
-
+from typing import Iterable
+from json.decoder import JSONDecodeError
 
 def pretty_json(input_filename):
     out_filename = '.'.join(input_filename.split('.')[:-1]) + '-pretty.json'
@@ -11,14 +12,16 @@ def pretty_json(input_filename):
             print(f'Wrote JSON to: {out_filename}')
 
 
-if __name__ == '__main__':
-    for file_name in sys.argv[1:]:
+def pretty_json_files(file_names: Iterable[str]):
+    for file_name in file_names:
         if file_name.endswith('.json'):
             try:
                 pretty_json(file_name)
-            except json.decoder.JSONDecodeError as err:
+            except (FileNotFoundError, JSONDecodeError) as err:
                 print(f'Could not decode {file_name}... {err}')
         else:
             print(f'Skipping non-JSON file {file_name}')
 
 
+if __name__ == '__main__':
+    pretty_json_files(sys.argv[1:])
