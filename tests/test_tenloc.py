@@ -44,7 +44,7 @@ class TestMatrix(unittest.TestCase):
 
     def test_matrix_frames(self):
         frames = matrix_frames(4, string.ascii_lowercase, 2, 0.0)
-        self.assertEquals(len(frames), 4)
+        self.assertEqual(len(frames), 4)
 
 class TestPrettyJSON(unittest.TestCase):
     JSON_FILE = 'tests/empty.json'
